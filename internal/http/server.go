@@ -9,8 +9,6 @@ import (
 
 type Server struct {
 	gin *gin.Engine
-	//commandController CommandController
-	//queryController   OrderQueryController
 }
 
 func NewServer(g *gin.Engine) *Server {
@@ -20,6 +18,7 @@ func NewServer(g *gin.Engine) *Server {
 
 	server.useHealth()
 	server.useRoutes()
+	server.useSwagger()
 
 	return &server
 }

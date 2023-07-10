@@ -6,21 +6,21 @@ import (
 	"github.com/google/uuid"
 )
 
-// ChatRepository ...
-type ChatRepository struct {
+// ChatRepositorySql ...
+type ChatRepositorySql struct {
 	store *UnitOfWorkSql
 }
 
 // Create ...
-func (r *ChatRepository) Create(c *domain.Chat) error {
+func (r *ChatRepositorySql) Create(c *domain.Chat) error {
 
-	if err := r.store.transaction.QueryRow(
+	if _, err := r.store.transaction.Exec(
 		"INSERT INTO chat (id, user_id, title, created_at) VALUES ($1, $2, $3, $4)",
 		c.Id,
 		c.UserId,
 		c.Title,
 		c.CreatedAt,
-	).Scan(&c.Id); err != nil {
+	); err != nil {
 		return err
 	}
 
@@ -42,7 +42,7 @@ func (r *ChatRepository) Create(c *domain.Chat) error {
 }
 
 // Find ...
-func (r *ChatRepository) Find(id uuid.UUID) (*domain.Chat, error) {
+func (r *ChatRepositorySql) Find(id uuid.UUID) (*domain.Chat, error) {
 	rows, err := r.store.transaction.Query(`
 		SELECT 
 			c.id, c.user_id, c.title, c.created_at, 
@@ -95,7 +95,7 @@ func (r *ChatRepository) Find(id uuid.UUID) (*domain.Chat, error) {
 }
 
 // FindByUser ...
-func (r *ChatRepository) FindByUser(userId uuid.UUID) ([]*domain.Chat, error) {
+func (r *ChatRepositorySql) FindByUser(userId uuid.UUID) ([]*domain.Chat, error) {
 	rows, err := r.store.transaction.Query(`
 		SELECT 
 			c.id, c.user_id, c.title, c.created_at, 

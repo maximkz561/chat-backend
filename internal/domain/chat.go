@@ -13,7 +13,7 @@ type Chat struct {
 	CreatedAt time.Time
 }
 
-func newChat(userId uuid.UUID, title string) *Chat {
+func NewChat(userId uuid.UUID, title string) *Chat {
 	return &Chat{
 		Id:        uuid.New(),
 		Messages:  []Message{},

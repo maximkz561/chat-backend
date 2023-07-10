@@ -1,6 +1,7 @@
 package main
 
 import (
+	"chat-backend/internal/database"
 	"context"
 	"log"
 	"net/http"
@@ -15,6 +16,9 @@ import (
 )
 
 func main() {
+
+	// TODO: Not sure if this is the best place to put this
+	database.Connect()
 
 	router := gin.Default()
 

@@ -1,24 +1,32 @@
 package sqlstore
 
 import (
+	"chat-backend/internal/database"
 	"chat-backend/internal/store"
-	"database/sql"
+	"github.com/jmoiron/sqlx"
 )
 
 type UnitOfWorkSql struct {
-	db             *sql.DB
-	transaction    *sql.Tx
-	chatRepository *ChatRepository
+	db             *sqlx.DB
+	transaction    *sqlx.Tx
+	chatRepository *ChatRepositorySql
+}
+
+func NewUnitOfWorkSql() *UnitOfWorkSql {
+	db := database.DB
+	return &UnitOfWorkSql{
+		db: db,
+	}
 }
 
 func (uow *UnitOfWorkSql) Begin() error {
-	tx, err := uow.db.Begin()
+	tx, err := uow.db.Beginx()
 	if err != nil {
 		return err
 	}
 
 	uow.transaction = tx
-	uow.chatRepository = &ChatRepository{
+	uow.chatRepository = &ChatRepositorySql{
 		store: uow,
 	}
 

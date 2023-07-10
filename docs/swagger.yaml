@@ -1,0 +1,44 @@
+definitions:
+  http_types.CreateChat:
+    properties:
+      title:
+        type: string
+      user_id:
+        type: string
+    type: object
+  http_types.ReadChat:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      title:
+        type: string
+      user_id:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /api/v1/chat:
+    post:
+      consumes:
+      - application/json
+      description: Add chat
+      operationId: add-chat
+      parameters:
+      - description: ping request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/http_types.CreateChat'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/http_types.ReadChat'
+      summary: Add chat
+swagger: "2.0"
