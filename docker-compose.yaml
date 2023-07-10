@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  # for local development
+  postgres:
+    image: postgres:15-alpine
+    container_name: chat_backend_postgres
+    ports:
+      - "5438:5432"
+    volumes:
+        - ./postgres_data_chat:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=chat

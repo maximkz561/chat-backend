@@ -1,0 +1,49 @@
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.so
+
+# Folders
+_obj
+_test
+
+# Go binary, executables and generated files
+*.exe
+*.exe~
+*.dll
+*.dylib
+*.test
+*.out
+
+# Dependency directories (remove the ones you don't need)
+/vendor/
+/vendor/*
+/Godeps/
+/_gopath/pkg/
+
+# GoLand IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Testing
+/cover
+/coverage.out
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+/*.coverprofile
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Temp files
+*~
+
+# Logs
+/log/
+*.log
+
+# Env files
+*.env
